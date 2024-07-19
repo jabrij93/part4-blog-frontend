@@ -2,7 +2,7 @@ import Note from './components/Note'
 import { useState, useEffect } from 'react'
 import noteService from './services/noteService'
 import loginService from './services/login'
-import Notification from './components/Notification'
+import Notification from './components/Notification.jsx'
 
 const App = () => {
   const [notes, setNotes] = useState([])

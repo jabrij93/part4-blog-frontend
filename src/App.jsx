@@ -60,7 +60,7 @@ const App = () => {
         username, password,
       })
       window.localStorage.setItem(
-        'loggedNoteappUser', JSON.stringify(user)
+        'loggedBlogappUser', JSON.stringify(user)
       ) 
       blogService.setToken(user.token)
       setUser(user)
@@ -114,7 +114,7 @@ const App = () => {
   
     try {
       window.localStorage.removeItem(
-        'loggedNoteappUser'
+        'loggedBlogappUser'
       )
       setUser(null)
       setUsername('')
@@ -164,13 +164,9 @@ const App = () => {
         Show {showAll ? 'important' : 'all' } 
       </button>
       <ul>
-        {Array.isArray(blogsToShow) && blogsToShow.map(blog => 
-          <Blog 
-            key={blog.id} 
-            blog={blog} 
-            toggleImportance={() => toggleImportanceOf(blog.id)} 
-          />
-        )}
+        {blogs.map((blog, index) => (
+          <Blog key={blog.id} blog={blog} toggleImportance={() => toggleImportance(blog.id)} index={index + 1} />
+        ))}
       </ul>
       <form onSubmit={addNote}>
         <input value={newBlog} onChange={handleNoteChange} />

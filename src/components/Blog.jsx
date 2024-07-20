@@ -1,9 +1,10 @@
-const Blog = ({ blog, toggleImportance }) => {
+const Blog = ({ blog, toggleImportance, index }) => {
     // const label = blog.important ? 'make not important' : 'make important'
     console.log("BLOG", blog);
 
     return (
       <div>
+         <p> {index} </p>
         <p> Title : {blog.title} </p>
         <p> Author : {blog.author} </p>
         <p> Likes : {blog.likes} </p>

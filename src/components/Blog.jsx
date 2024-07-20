@@ -1,6 +1,5 @@
 const Blog = ({ blog, toggleImportance, index }) => {
     // const label = blog.important ? 'make not important' : 'make important'
-    console.log("BLOG", blog);
 
     return (
       <div>

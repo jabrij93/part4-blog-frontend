@@ -1,12 +1,12 @@
-import Note from './components/Note'
+import Blog from './components/Blog.jsx'
 import { useState, useEffect } from 'react'
-import noteService from './services/noteService'
+import blogService from './services/blogService.js'
 import loginService from './services/login'
 import Notification from './components/Notification.jsx'
 
 const App = () => {
-  const [notes, setNotes] = useState([])
-  const [newNote, setNewNotes] = useState('add a new note..')
+  const [blogs, setBlogs] = useState([])
+  const [newBlog, setNewBlogs] = useState('add a new blog..')
   const [showAll, setShowAll] = useState(true)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
@@ -15,36 +15,36 @@ const App = () => {
 
   useEffect(() => {
     console.log('effect')
-    noteService 
+    blogService 
       .getAll()
-      .then(initialNotes => {
-        console.log('Fetched notes:', initialNotes)
-        setNotes(initialNotes)
+      .then(initialBlogs => {
+        console.log('Fetched blogs:', initialBlogs)
+        setBlogs(initialBlogs)
       })
   }, [])
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      noteService.setToken(user.token)
+      blogService.setToken(user.token)
     }
   }, [])
 
   const addNote = (event) => {
     event.preventDefault()
 
-    const noteObject = {
-      content: newNote,
+    const blogObject = {
+      content: newBlog,
       important: Math.random() < 0.5,
     }
 
-    noteService
-      .create(noteObject)
-      .then(returnedNote => {
-        setNotes(notes.concat(returnedNote))
-        setNewNotes('')
+    blogService
+      .create(blogObject)
+      .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setNewBlogs('')
       })
   }
 
@@ -62,7 +62,7 @@ const App = () => {
       window.localStorage.setItem(
         'loggedNoteappUser', JSON.stringify(user)
       ) 
-      noteService.setToken(user.token)
+      blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
@@ -100,10 +100,10 @@ const App = () => {
     </form>      
   )
 
-  const noteForm = () => (
+  const blogForm = () => (
     <form onSubmit={addNote}>
       <input
-        value={newNote}
+        value={newBlog}
         onChange={handleNoteChange}
       />
       <button type="submit">save</button>
@@ -128,21 +128,21 @@ const App = () => {
     console.log(`${username} logged out`)
   }
 
-  const notesToShow = showAll ? notes : notes.filter(note => note.important === true)
-  console.log('Notes to show:', notesToShow)
+  const blogsToShow = showAll ? blogs : blogs.filter(blog => blog.important === true)
+  console.log('Blogs to show:', blogsToShow)
 
   const toggleImportanceOf = (id) => {
-    const note = notes.find(n => n.id === id)
-    const changedNote = { ...note, important: !note.important }
+    const blog = blogs.find(n => n.id === id)
+    const changedBlog = { ...blog, important: !blog.important }
 
-    noteService
+    blogService
       .update(id, changedNote)
-        .then(returnedNote => { 
-          setNotes(notes.map(note => note.id === id ? returnedNote : note)) 
+        .then(returnedBlog => { 
+          setBlogs(blogs.map(blog => blog.id === id ? returnedBlog : blog)) 
         })
         .catch(error=> {
-          alert(`the note '${note.content}' was already deleted from server`)
-          setNotes(notes.filter(n => n.id === id ))
+          alert(`the blog '${blog.content}' was already deleted from server`)
+          setBlogs(blogs.filter(n => n.id === id ))
         })
 
     console.log(`importance of ${id} needs to be toggled`)
@@ -164,16 +164,16 @@ const App = () => {
         Show {showAll ? 'important' : 'all' } 
       </button>
       <ul>
-        {Array.isArray(notesToShow) && notesToShow.map(note => 
-          <Note 
-            key={note.id} 
-            note={note} 
-            toggleImportance={() => toggleImportanceOf(note.id)} 
+        {Array.isArray(blogsToShow) && blogsToShow.map(blog => 
+          <Blog 
+            key={blog.id} 
+            blog={blog} 
+            toggleImportance={() => toggleImportanceOf(blog.id)} 
           />
         )}
       </ul>
       <form onSubmit={addNote}>
-        <input value={newNote} onChange={handleNoteChange} />
+        <input value={newBlog} onChange={handleNoteChange} />
         <button type="submit">save</button>
       </form>
     </div>

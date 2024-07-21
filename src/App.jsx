@@ -1,5 +1,6 @@
 import Blog from './components/Blog.jsx'
 import { useState, useEffect } from 'react'
+import AddNewBlog from './components/AddNewBlog'
 import blogService from './services/blogService.js'
 import loginService from './services/login'
 import Notification from './components/Notification.jsx'
@@ -7,6 +8,10 @@ import Notification from './components/Notification.jsx'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [newBlog, setNewBlogs] = useState('add a new blog..')
+  const [newTitle, setNewTitles] = useState('')
+  const [newAuthor, setNewAuthors] = useState('')
+  const [newUrl, setNewUrls] = useState('')
+  const [newLike, setNewLikes] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
@@ -48,8 +53,38 @@ const App = () => {
       })
   }
 
-  const handleNoteChange = (event) => {
-    setNewNotes(event.target.value)    
+  const addBlog = (event) => {
+    event.preventDefault()
+
+    const blogObject = {
+      title: newTitle,
+      author: newAuthor,
+      url: newUrl,
+      likes: newLike === undefined ? 0 : Number(newLike) 
+    }
+
+    blogService
+      .create(blogObject)
+      .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setNewBlogs('')
+      })
+  }
+
+  const handleTitleChange = (event) => {
+    setNewTitles(event.target.value)    
+  }
+
+  const handleAuthorChange = (event) => {
+    setNewAuthors(event.target.value)    
+  }
+
+  const handleUrlChange = (event) => {
+    setNewUrls(event.target.value)    
+  }
+
+  const handleLikeChange = (event) => {
+    setNewLikes(event.target.value)    
   }
 
   const handleLogin = async (event) => {
@@ -100,15 +135,15 @@ const App = () => {
     </form>      
   )
 
-  const blogForm = () => (
-    <form onSubmit={addNote}>
-      <input
-        value={newBlog}
-        onChange={handleNoteChange}
-      />
-      <button type="submit">save</button>
-    </form>  
-  )
+  // const blogForm = () => (
+  //   <form onSubmit={addNote}>
+  //     <input
+  //       value={newBlog}
+  //       onChange={handleNoteChange}
+  //     />
+  //     <button type="submit">save</button>
+  //   </form>  
+  // )
 
   const handleLogOut = async (event) => {
   
@@ -168,10 +203,12 @@ const App = () => {
           <Blog key={blog.id} blog={blog} toggleImportance={() => toggleImportance(blog.id)} index={index + 1} />
         ))}
       </ul>
-      <form onSubmit={addNote}>
+      <AddNewBlog handleTitleChange={handleTitleChange} newTitle={newTitle} handleAuthorChange={handleAuthorChange} handleLikeChange={handleLikeChange} newAuthor={newAuthor} handleUrlChange={handleUrlChange} newUrl={newUrl} newLike={newLike}/>
+
+      {/* <form onSubmit={addNote}>
         <input value={newBlog} onChange={handleNoteChange} />
         <button type="submit">save</button>
-      </form>
+      </form> */}
     </div>
   )
 }

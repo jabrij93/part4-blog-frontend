@@ -67,8 +67,21 @@ const App = () => {
       .create(blogObject)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
-        setNewBlogs('')
+        setNewTitles('')
+        setNewAuthors('')
+        setNewUrls('')
+        setNewLikes('')
+        setNotifications({ message: `Added ${returnedBlog}'s blog.`, type: 'success' });
+        setTimeout(() => {
+          setNotifications(null)
+        }, 5000)
       })
+      .catch(error => {
+        setNotifications({ message: error.response.data.error, type: 'error' })
+        setTimeout(() => {
+          setNotifications(null)
+        }, 5000)
+      }) 
   }
 
   const handleTitleChange = (event) => {
@@ -203,7 +216,12 @@ const App = () => {
           <Blog key={blog.id} blog={blog} toggleImportance={() => toggleImportance(blog.id)} index={index + 1} />
         ))}
       </ul>
-      <AddNewBlog handleTitleChange={handleTitleChange} newTitle={newTitle} handleAuthorChange={handleAuthorChange} handleLikeChange={handleLikeChange} newAuthor={newAuthor} handleUrlChange={handleUrlChange} newUrl={newUrl} newLike={newLike}/>
+      <AddNewBlog addBlog={addBlog}
+        handleTitleChange={handleTitleChange} newTitle={newTitle} 
+        handleAuthorChange={handleAuthorChange} newAuthor={newAuthor} 
+        handleLikeChange={handleLikeChange} newLike={newLike}
+        handleUrlChange={handleUrlChange} newUrl={newUrl} 
+      />
 
       {/* <form onSubmit={addNote}>
         <input value={newBlog} onChange={handleNoteChange} />

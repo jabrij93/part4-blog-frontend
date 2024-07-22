@@ -71,7 +71,7 @@ const App = () => {
         setNewAuthors('')
         setNewUrls('')
         setNewLikes('')
-        setNotifications({ message: `Added ${returnedBlog}'s blog.`, type: 'success' });
+        setNotifications({ message: `Added ${newTitle}! by ${newAuthor}`, type: 'success' });
         setTimeout(() => {
           setNotifications(null)
         }, 5000)
@@ -115,12 +115,13 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (exception) {
-      setNotifications('Wrong credentials')
+      setNotifications({ message: `wrong username or password`, type: 'error' })
       setTimeout(() => {
         setNotifications(null)
       }, 5000)
     }
-    setNotifications(`logging in with ${username}`)
+    
+    // setNotifications(`logging in with ${username}`)
     console.log('logging in with', username, password)
   }
 
@@ -198,7 +199,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Notes</h1>
+      <h1>Blogs</h1>
       <Notification message={notifications?.message} type={notifications?.type}/> 
 
       {user === null ?

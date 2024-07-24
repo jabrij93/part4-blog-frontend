@@ -147,16 +147,6 @@ const App = () => {
     </form>      
   )
 
-  // const blogForm = () => (
-  //   <form onSubmit={addNote}>
-  //     <input
-  //       value={newBlog}
-  //       onChange={handleNoteChange}
-  //     />
-  //     <button type="submit">save</button>
-  //   </form>  
-  // )
-
   const handleLogOut = async (event) => {
   
     try {
@@ -220,11 +210,6 @@ const App = () => {
         handleLikeChange={handleLikeChange} newLike={newLike}
         handleUrlChange={handleUrlChange} newUrl={newUrl} 
       />
-
-      {/* <form onSubmit={addNote}>
-        <input value={newBlog} onChange={handleNoteChange} />
-        <button type="submit">save</button>
-      </form> */}
     </div>
   )
 }

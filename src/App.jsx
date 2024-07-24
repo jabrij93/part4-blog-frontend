@@ -19,11 +19,9 @@ const App = () => {
   const [user, setUser] = useState(null) 
 
   useEffect(() => {
-    console.log('effect')
     blogService 
       .getAll()
       .then(initialBlogs => {
-        console.log('Fetched blogs:', initialBlogs)
         setBlogs(initialBlogs)
       })
   }, [])
@@ -178,7 +176,6 @@ const App = () => {
   }
 
   const blogsToShow = showAll ? blogs : blogs.filter(blog => blog.important === true)
-  console.log('Blogs to show:', blogsToShow)
 
   const toggleImportanceOf = (id) => {
     const blog = blogs.find(n => n.id === id)

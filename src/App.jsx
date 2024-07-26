@@ -139,14 +139,14 @@ const App = () => {
             <button onClick={() => setLoginVisible(true)}>log in</button>
           </div>
           <div style={{ display: loginVisible ? '' : 'none' }}>
-            <LoginForm
-              username={username}
-              password={password}
-              handleUsernameChange={({ target }) => setUsername(target.value)}
-              handlePasswordChange={({ target }) => setPassword(target.value)}
-              handleSubmit={handleLogin}
-            />
-            <button onClick={() => setLoginVisible(false)}>cancel</button>
+              <LoginForm
+                username={username}
+                password={password}
+                handleCancel={setLoginVisible}
+                handleUsernameChange={({ target }) => setUsername(target.value)}
+                handlePasswordChange={({ target }) => setPassword(target.value)}
+                handleSubmit={handleLogin}
+              />
           </div>
         </div>
       ) : (
@@ -163,9 +163,9 @@ const App = () => {
         </div>
       )}
 
-      <button onClick={() => setShowAll(!showAll)}>
+      {/* <button onClick={() => setShowAll(!showAll)}>
         Show {showAll ? 'important' : 'all' } 
-      </button>
+      </button> */}
       <ul>
         {blogs.map((blog, index) => (
           <Blog key={blog.id} blog={blog} toggleImportance={() => toggleImportance(blog.id)} index={index + 1} />

@@ -1,5 +1,6 @@
 const LoginForm = ({
     handleSubmit,
+    handleCancel,
     handleUsernameChange,
     handlePasswordChange,
     username,
@@ -25,7 +26,12 @@ const LoginForm = ({
              onChange={handlePasswordChange}
            />
        </div>
-         <button type="submit">login</button>
+       <div style={{ display: 'flex', alignItems: 'center' }}>
+        <button type="submit">login</button>
+        <button type="button" onClick={handleCancel} style={{ marginLeft: '10px' }}>
+          cancel
+        </button>
+      </div>
        </form>
      </div>
    )

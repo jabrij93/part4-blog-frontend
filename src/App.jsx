@@ -17,6 +17,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [notifications, setNotifications] = useState(null)
   const [user, setUser] = useState(null) 
+  const [loginVisible, setLoginVisible] = useState(false);
 
   useEffect(() => {
     blogService 
@@ -114,10 +115,11 @@ const App = () => {
       setPassword('')
     } catch (exception) {
       setNotifications({ message: `wrong username or password`, type: 'error' })
-      setTimeout(() => {
-        setNotifications(null)
-      }, 5000)
     }
+
+    setTimeout(() => {
+      setNotifications(null)
+    }, 5000)
     
     // setNotifications(`logging in with ${username}`)
     console.log('logging in with', username, password)

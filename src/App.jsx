@@ -37,22 +37,6 @@ const App = () => {
     }
   }, [])
 
-  const addNote = (event) => {
-    event.preventDefault()
-
-    const blogObject = {
-      content: newBlog,
-      important: Math.random() < 0.5,
-    }
-
-    blogService
-      .create(blogObject)
-      .then(returnedBlog => {
-        setBlogs(blogs.concat(returnedBlog))
-        setNewBlogs('')
-      })
-  }
-
   const addBlog = (event) => {
     event.preventDefault()
 
@@ -144,25 +128,6 @@ const App = () => {
     console.log(`${username} logged out`)
   }
 
-  const blogsToShow = showAll ? blogs : blogs.filter(blog => blog.important === true)
-
-  const toggleImportanceOf = (id) => {
-    const blog = blogs.find(n => n.id === id)
-    const changedBlog = { ...blog, important: !blog.important }
-
-    blogService
-      .update(id, changedNote)
-        .then(returnedBlog => { 
-          setBlogs(blogs.map(blog => blog.id === id ? returnedBlog : blog)) 
-        })
-        .catch(error=> {
-          alert(`the blog '${blog.content}' was already deleted from server`)
-          setBlogs(blogs.filter(n => n.id === id ))
-        })
-
-    console.log(`importance of ${id} needs to be toggled`)
-  }
-
   return (
     <div>
       <h1>Blogs</h1>
@@ -194,7 +159,7 @@ const App = () => {
             handleLikeChange={handleLikeChange} newLike={newLike}
             handleUrlChange={handleUrlChange} newUrl={newUrl} 
           />
-          
+
         </div>
       )}
 

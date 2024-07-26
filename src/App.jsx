@@ -4,6 +4,7 @@ import AddNewBlog from './components/AddNewBlog'
 import blogService from './services/blogService.js'
 import loginService from './services/login'
 import Notification from './components/Notification.jsx'
+import LoginForm from './components/LoginForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -125,31 +126,7 @@ const App = () => {
     console.log('logging in with', username, password)
   }
 
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-      <div>
-        username
-          <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
-        password
-          <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">login</button>
-    </form>      
-  )
-
-  const handleLogOut = async (event) => {
+  const handleLogout = async (event) => {
   
     try {
       window.localStorage.removeItem(
@@ -191,12 +168,35 @@ const App = () => {
       <h1>Blogs</h1>
       <Notification message={notifications?.message} type={notifications?.type}/> 
 
-      {user === null ?
-      loginForm() :
-      <div>
-        <p>{user.name} logged-in</p> <button onClick={handleLogOut}>Log Out</button>
-      </div>
-    }
+      {user === null ? (
+        <div>
+          <div style={{ display: loginVisible ? 'none' : '' }}>
+            <button onClick={() => setLoginVisible(true)}>log in</button>
+          </div>
+          <div style={{ display: loginVisible ? '' : 'none' }}>
+            <LoginForm
+              username={username}
+              password={password}
+              handleUsernameChange={({ target }) => setUsername(target.value)}
+              handlePasswordChange={({ target }) => setPassword(target.value)}
+              handleSubmit={handleLogin}
+            />
+            <button onClick={() => setLoginVisible(false)}>cancel</button>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <p>{user.name} logged in</p>
+          <button onClick={handleLogout}>logout</button>
+          <AddNewBlog addBlog={addBlog}
+            handleTitleChange={handleTitleChange} newTitle={newTitle} 
+            handleAuthorChange={handleAuthorChange} newAuthor={newAuthor} 
+            handleLikeChange={handleLikeChange} newLike={newLike}
+            handleUrlChange={handleUrlChange} newUrl={newUrl} 
+          />
+          
+        </div>
+      )}
 
       <button onClick={() => setShowAll(!showAll)}>
         Show {showAll ? 'important' : 'all' } 

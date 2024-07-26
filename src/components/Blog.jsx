@@ -7,7 +7,7 @@ const Blog = ({ blog, toggleImportance, index }) => {
         <p> Title : {blog.title} </p>
         <p> Author : {blog.author} </p>
         <p> Likes : {blog.likes} </p>
-        <p> Url : {blog.author} </p>
+        <p> Url : {blog.url} </p>
         
         {/* <button onClick={toggleImportance}> {label} </button> */}
       </div>

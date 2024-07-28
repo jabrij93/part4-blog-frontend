@@ -142,7 +142,7 @@ const App = () => {
               <LoginForm
                 username={username}
                 password={password}
-                handleCancel={setLoginVisible}
+                handleCancel={()=>setLoginVisible(false)}
                 handleUsernameChange={({ target }) => setUsername(target.value)}
                 handlePasswordChange={({ target }) => setPassword(target.value)}
                 handleSubmit={handleLogin}

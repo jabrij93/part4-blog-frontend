@@ -5,6 +5,7 @@ import blogService from './services/blogService.js'
 import loginService from './services/login'
 import Notification from './components/Notification.jsx'
 import LoginForm from './components/LoginForm'
+import Togglable from './components/Togglable';
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -111,7 +112,6 @@ const App = () => {
   }
 
   const handleLogout = async (event) => {
-  
     try {
       window.localStorage.removeItem(
         'loggedBlogappUser'
@@ -152,14 +152,15 @@ const App = () => {
       ) : (
         <div>
           <p>{user.name} logged in</p>
+          <Togglable buttonLabel='Create New Blog'>
+            <AddNewBlog addBlog={addBlog}
+              handleTitleChange={handleTitleChange} newTitle={newTitle} 
+              handleAuthorChange={handleAuthorChange} newAuthor={newAuthor} 
+              handleLikeChange={handleLikeChange} newLike={newLike}
+              handleUrlChange={handleUrlChange} newUrl={newUrl} 
+            />
+          </Togglable>
           <button onClick={handleLogout}>logout</button>
-          <AddNewBlog addBlog={addBlog}
-            handleTitleChange={handleTitleChange} newTitle={newTitle} 
-            handleAuthorChange={handleAuthorChange} newAuthor={newAuthor} 
-            handleLikeChange={handleLikeChange} newLike={newLike}
-            handleUrlChange={handleUrlChange} newUrl={newUrl} 
-          />
-
         </div>
       )}
 

@@ -1,5 +1,5 @@
 import Blog from './components/Blog.jsx'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import AddNewBlog from './components/AddNewBlog'
 import blogService from './services/blogService.js'
 import loginService from './services/login'
@@ -38,7 +38,10 @@ const App = () => {
     }
   }, [])
 
+  const blogFormRef = useRef()
+
   const addBlog = (event) => {
+    blogFormRef.current.toggleVisibility()
     event.preventDefault()
 
     const blogObject = {
@@ -152,7 +155,7 @@ const App = () => {
       ) : (
         <div>
           <p>{user.name} logged in</p>
-          <Togglable buttonLabel='Create New Blog'>
+          <Togglable buttonLabel='create new blog'>
             <AddNewBlog addBlog={addBlog}
               handleTitleChange={handleTitleChange} newTitle={newTitle} 
               handleAuthorChange={handleAuthorChange} newAuthor={newAuthor} 

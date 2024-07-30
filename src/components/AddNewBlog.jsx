@@ -1,4 +1,6 @@
-const AddNewBlog = ({handleTitleChange, handleAuthorChange, handleUrlChange, handleLikeChange, addBlog, newTitle, newAuthor, newUrl, newLike}) => {
+import { useState } from 'react'
+
+const AddNewBlog = ( {handleTitleChange, handleAuthorChange, handleUrlChange, handleLikeChange, addBlog, newTitle, newAuthor, newUrl, newLike}) => {
     return (
       <div>
         <form onSubmit={addBlog}>

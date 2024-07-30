@@ -41,7 +41,6 @@ const App = () => {
   const blogFormRef = useRef()
 
   const addBlog = (event) => {
-    blogFormRef.current.toggleVisibility()
     event.preventDefault()
 
     const blogObject = {
@@ -63,6 +62,11 @@ const App = () => {
         setTimeout(() => {
           setNotifications(null)
         }, 5000)
+
+        // Delay the toggleVisibility call
+        setTimeout(() => {
+          blogFormRef.current.toggleVisibility()
+        }, 0) // Adjust the delay as needed
       })
       .catch(error => {
         setNotifications({ message: error.response.data.error, type: 'error' })
@@ -155,7 +159,7 @@ const App = () => {
       ) : (
         <div>
           <p>{user.name} logged in</p>
-          <Togglable buttonLabel='create new blog'>
+          <Togglable buttonLabel='create new blog' ref={blogFormRef}>
             <AddNewBlog addBlog={addBlog}
               handleTitleChange={handleTitleChange} newTitle={newTitle} 
               handleAuthorChange={handleAuthorChange} newAuthor={newAuthor} 

@@ -9,11 +9,6 @@ import Togglable from './components/Togglable';
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [newBlog, setNewBlogs] = useState('add a new blog..')
-  const [newTitle, setNewTitles] = useState('')
-  const [newAuthor, setNewAuthors] = useState('')
-  const [newUrl, setNewUrls] = useState('')
-  const [newLike, setNewLikes] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
@@ -66,36 +61,13 @@ const App = () => {
       }) 
   }
 
-  const handleTitleChange = (event) => {
-    setNewTitles(event.target.value)    
-  }
-
-  const handleAuthorChange = (event) => {
-    setNewAuthors(event.target.value)    
-  }
-
-  const handleUrlChange = (event) => {
-    setNewUrls(event.target.value)    
-  }
-
-  const handleLikeChange = (event) => {
-    setNewLikes(event.target.value)    
-  }
-
-  const handleLogin = async (event) => {
-    event.preventDefault()
-    
+  const handleLogin = async (userCredentials) => {
     try {
-      const user = await loginService.login({
-        username, password,
-      })
-      window.localStorage.setItem(
-        'loggedBlogappUser', JSON.stringify(user)
-      ) 
+      const user = await loginService.login(userCredentials)
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user)) 
       blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
+      setNotifications({ message: `Logging in as ${user.name}`, type: 'success' });
     } catch (exception) {
       setNotifications({ message: `wrong username or password`, type: 'error' })
     }
@@ -103,9 +75,6 @@ const App = () => {
     setTimeout(() => {
       setNotifications(null)
     }, 5000)
-    
-    // setNotifications(`logging in with ${username}`)
-    console.log('logging in with', username, password)
   }
 
   const handleLogout = async (event) => {
@@ -122,7 +91,6 @@ const App = () => {
         setNotifications(null)
       }, 5000)
     }
-    console.log(`${username} logged out`)
   }
 
   return (
@@ -136,14 +104,11 @@ const App = () => {
             <button onClick={() => setLoginVisible(true)}>log in</button>
           </div>
           <div style={{ display: loginVisible ? '' : 'none' }}>
+            <Togglable buttonLabel='login' ref={blogFormRef}>
               <LoginForm
-                username={username}
-                password={password}
-                handleCancel={()=>setLoginVisible(false)}
-                handleUsernameChange={({ target }) => setUsername(target.value)}
-                handlePasswordChange={({ target }) => setPassword(target.value)}
-                handleSubmit={handleLogin}
+                userLogin={handleLogin}
               />
+            </Togglable>
           </div>
         </div>
       ) : (

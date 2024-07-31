@@ -40,25 +40,15 @@ const App = () => {
 
   const blogFormRef = useRef()
 
-  const addBlog = (event) => {
-    event.preventDefault()
-
-    const blogObject = {
-      title: newTitle,
-      author: newAuthor,
-      url: newUrl,
-      likes: newLike === undefined ? 0 : Number(newLike) 
-    }
+  const addBlog = (blogObject) => {
 
     blogService
       .create(blogObject)
       .then(returnedBlog => {
+        console.log("RETURNED BLOGS", returnedBlog)
         setBlogs(blogs.concat(returnedBlog))
-        setNewTitles('')
-        setNewAuthors('')
-        setNewUrls('')
-        setNewLikes('')
-        setNotifications({ message: `Added ${newTitle}! by ${newAuthor}`, type: 'success' });
+        
+        setNotifications({ message: `Added ${returnedBlog.title}! by ${returnedBlog.author}`, type: 'success' });
         setTimeout(() => {
           setNotifications(null)
         }, 5000)
@@ -160,12 +150,7 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <Togglable buttonLabel='create new blog' ref={blogFormRef}>
-            <AddNewBlog addBlog={addBlog}
-              handleTitleChange={handleTitleChange} newTitle={newTitle} 
-              handleAuthorChange={handleAuthorChange} newAuthor={newAuthor} 
-              handleLikeChange={handleLikeChange} newLike={newLike}
-              handleUrlChange={handleUrlChange} newUrl={newUrl} 
-            />
+            <AddNewBlog createBlog={addBlog} />
           </Togglable>
           <button onClick={handleLogout}>logout</button>
         </div>
@@ -179,12 +164,7 @@ const App = () => {
           <Blog key={blog.id} blog={blog} toggleImportance={() => toggleImportance(blog.id)} index={index + 1} />
         ))}
       </ul>
-      <AddNewBlog addBlog={addBlog}
-        handleTitleChange={handleTitleChange} newTitle={newTitle} 
-        handleAuthorChange={handleAuthorChange} newAuthor={newAuthor} 
-        handleLikeChange={handleLikeChange} newLike={newLike}
-        handleUrlChange={handleUrlChange} newUrl={newUrl} 
-      />
+      <AddNewBlog addBlog={addBlog} createBlog={addBlog} />
     </div>
   )
 }

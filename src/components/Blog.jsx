@@ -52,7 +52,11 @@ const Blog = ({ blog, toggleImportance, index }) => {
                 <button onClick={toggleVisibility} > hide </button>
                 </div>
               
-                <p> Likes: {blog.likes} </p>
+                <div style={{display: 'flex'}}>
+                  <p> Likes: {blog.likes} </p>
+                  <button onClick={toggleVisibility} > like </button>
+                </div>
+
           
                 <p> Url: {blog.url} </p>
               </div>

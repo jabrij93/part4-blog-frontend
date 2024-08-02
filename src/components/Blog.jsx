@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
 
-const Blog = ({ blog, toggleImportance, index, id, updatedLike }) => {
+const Blog = ({ blog, toggleImportance, index, id, updatedLike, blogId, loggedInUsername }) => {
   const [likes, setLikes] = useState(blog.likes)
   const [visible, setVisible] = useState(false)
 
@@ -28,6 +28,13 @@ const Blog = ({ blog, toggleImportance, index, id, updatedLike }) => {
     updatedLike(blog.id, { ...blog, likes: likes + 1 })
   }
 
+  const onDelete = () => {
+    blogId(blog.id)
+  }
+
+  // Ensure loggedInUsername is defined before using
+  const showDeleteButton = loggedInUsername && blog.user.username === loggedInUsername;
+
 
   return (
     <div>
@@ -49,6 +56,7 @@ const Blog = ({ blog, toggleImportance, index, id, updatedLike }) => {
                 </div>
 
                 <p> Url: {blog.url} </p>
+                {showDeleteButton && <button onClick={onDelete}>delete</button>}
               </div>
               
             </div>

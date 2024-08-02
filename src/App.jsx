@@ -9,6 +9,7 @@ import Togglable from './components/Togglable';
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  console.log("INSPECT BLOGS", blogs)
   const [likes, setLikes] = useState(blogs.likes)
   const [showAll, setShowAll] = useState(true)
   const [username, setUsername] = useState('') 
@@ -17,6 +18,7 @@ const App = () => {
   const [user, setUser] = useState(null) 
   const [loginVisible, setLoginVisible] = useState(false);
 
+  
   useEffect(() => {
     blogService 
       .getAll()
@@ -24,11 +26,6 @@ const App = () => {
         setBlogs(initialBlogs)
       })
   }, [])
-
-  useEffect(() => {
-    console.log('Blogs state updated:', blogs);
-  }, [blogs]);
-  
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -89,6 +86,44 @@ const App = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    // Ensure user and blogs state is correctly set
+    if (!user) {
+      console.error('User is not logged in');
+      return;
+    }
+
+    // Find the specific blog by id
+    const blogToDelete = blogs.find(blog => blog.id === id);
+
+    // Check if the blog was found
+    if (!blogToDelete) {
+      console.error('Blog not found');
+      return;
+    }
+
+    const confirmDelete = window.confirm(`Are you sure you want to delete ${blogToDelete.title} by ${blogToDelete.author}?`);
+
+    if (!confirmDelete) {
+      return; // If the user clicks "Cancel", do nothing
+    }
+
+    try {
+    await blogService.deleteBlog(id);
+    setBlogs(blogs.filter(blog => blog.id !== id)); // Update state by filtering out the deleted blog
+    setNotifications({ message: `SUCCESSFULLY DELETED!`, type: 'success' });
+      setTimeout(() => {
+        setNotifications(null);
+      }, 5000);
+      console.log("SUCCESSFULLY DELETED")
+    } catch (error) {
+      setNotifications({ message: error.message, type: 'error' });
+      setTimeout(() => {
+        setNotifications(null);
+      }, 5000);
+    }
+  }
+
   const handleLogin = async (userCredentials) => {
     try {
       const user = await loginService.login(userCredentials)
@@ -120,6 +155,11 @@ const App = () => {
       }, 5000)
     }
   }
+
+  const loggedInUser = user?.username
+  console.log("LOGGEDINUSER", loggedInUser)
+  
+
 
   return (
     <div>
@@ -156,9 +196,11 @@ const App = () => {
         {blogs
         .slice() // Create a copy of the blogs array to avoid mutating the original
         .sort((a, b) => b.likes - a.likes) // Sort the array based on likes in descending order
-        .map((blog, index) => (
-          <Blog key={blog.id} blog={blog} index={index + 1} updatedLike={addLike} />
-        ))}
+        .map((blog) => {
+          console.log('Rendering blog with id:', blog.id); // Debugging line
+          return (
+          <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsername={loggedInUser}/>
+        )})}
       </ul>
       <AddNewBlog createBlog={addBlog} />
     </div>

@@ -9,6 +9,8 @@ import Togglable from './components/Togglable';
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [likes, setLikes] = useState(blogs.likes)
+  console.log("INSPECT blog App.jsx", blogs.likes)
   const [showAll, setShowAll] = useState(true)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
@@ -60,6 +62,22 @@ const App = () => {
         }, 5000)
       }) 
   }
+
+  const addLike = async (id, blogObject) => {
+    try {
+      const returnedBlog = await blogService.update(id, blogObject);
+      setLikes(returnedBlog.likes);
+      setNotifications({ message: `Liked ${returnedBlog.title} by ${returnedBlog.author}!`, type: 'success' });
+      setTimeout(() => {
+        setNotifications(null);
+      }, 5000);
+    } catch (error) {
+      setNotifications({ message: error.response.data.error, type: 'error' });
+      setTimeout(() => {
+        setNotifications(null);
+      }, 5000);
+    }
+  };
 
   const handleLogin = async (userCredentials) => {
     try {
@@ -126,10 +144,10 @@ const App = () => {
       </button> */}
       <ul>
         {blogs.map((blog, index) => (
-          <Blog key={blog.id} blog={blog} toggleImportance={() => toggleImportance(blog.id)} index={index + 1} />
+          <Blog key={blog.id} blog={blog} toggleImportance={() => toggleImportance(blog.id)} index={index + 1} updatedLike={addLike} />
         ))}
       </ul>
-      <AddNewBlog addBlog={addBlog} createBlog={addBlog} />
+      <AddNewBlog createBlog={addBlog} />
     </div>
   )
 }

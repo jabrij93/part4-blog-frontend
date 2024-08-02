@@ -1,7 +1,10 @@
 import React from 'react';
 import { useState } from 'react'
 
-const Blog = ({ blog, toggleImportance, index }) => {
+const Blog = ({ blog, toggleImportance, index, id, updatedLike }) => {
+  const [likes, setLikes] = useState(blog.likes)
+  console.log("INSPECT LIKES", likes)
+  
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -37,6 +40,10 @@ const Blog = ({ blog, toggleImportance, index }) => {
     marginLeft: '10px',
   };
 
+  const addLike = () => {
+    updatedLike(blog.id, { ...blog, likes: likes + 1 })
+  }
+
 
   return (
     <div>
@@ -54,10 +61,9 @@ const Blog = ({ blog, toggleImportance, index }) => {
               
                 <div style={{display: 'flex'}}>
                   <p> Likes: {blog.likes} </p>
-                  <button onClick={toggleVisibility} > like </button>
+                  <button onClick={addLike} > like </button>
                 </div>
 
-          
                 <p> Url: {blog.url} </p>
               </div>
               

@@ -1,10 +1,8 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Blog = ({ blog, toggleImportance, index, id, updatedLike }) => {
   const [likes, setLikes] = useState(blog.likes)
-  console.log("INSPECT LIKES", likes)
-  
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -39,6 +37,10 @@ const Blog = ({ blog, toggleImportance, index, id, updatedLike }) => {
   const buttonStyle = {
     marginLeft: '10px',
   };
+
+  useEffect(() => {
+    setLikes(blog.likes);
+  }, [blog.likes]);
 
   const addLike = () => {
     updatedLike(blog.id, { ...blog, likes: likes + 1 })

@@ -10,7 +10,6 @@ import Togglable from './components/Togglable';
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [likes, setLikes] = useState(blogs.likes)
-  console.log("INSPECT blog App.jsx", blogs.likes)
   const [showAll, setShowAll] = useState(true)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
@@ -25,6 +24,11 @@ const App = () => {
         setBlogs(initialBlogs)
       })
   }, [])
+
+  useEffect(() => {
+    console.log('Blogs state updated:', blogs);
+  }, [blogs]);
+  
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -64,10 +68,15 @@ const App = () => {
   }
 
   const addLike = async (id, blogObject) => {
+    console.log('Before setBlogs:', blogs);
+    
     try {
       const returnedBlog = await blogService.update(id, blogObject);
       setLikes(returnedBlog.likes);
+      console.log('Updated blog:', returnedBlog);
+      // setBlogs(prevBlogs => prevBlogs.map(blog => (blog.id === id ? returnedBlog : blog)));
       setBlogs(blogs.map(blog => (blog.id === id ? returnedBlog : blog))); // Update the state with the new blog data
+      console.log('After setBlogs:', blogs);
       setNotifications({ message: `Liked ${returnedBlog.title} by ${returnedBlog.author}!`, type: 'success' });
       setTimeout(() => {
         setNotifications(null);
@@ -145,7 +154,7 @@ const App = () => {
       </button> */}
       <ul>
         {blogs.map((blog, index) => (
-          <Blog key={blog.id} blog={blog} toggleImportance={() => toggleImportance(blog.id)} index={index + 1} updatedLike={addLike} />
+          <Blog key={blog.id} blog={blog} index={index + 1} updatedLike={addLike} />
         ))}
       </ul>
       <AddNewBlog createBlog={addBlog} />

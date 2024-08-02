@@ -153,7 +153,10 @@ const App = () => {
         Show {showAll ? 'important' : 'all' } 
       </button> */}
       <ul>
-        {blogs.map((blog, index) => (
+        {blogs
+        .slice() // Create a copy of the blogs array to avoid mutating the original
+        .sort((a, b) => b.likes - a.likes) // Sort the array based on likes in descending order
+        .map((blog, index) => (
           <Blog key={blog.id} blog={blog} index={index + 1} updatedLike={addLike} />
         ))}
       </ul>

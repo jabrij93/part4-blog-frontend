@@ -20,24 +20,6 @@ const Blog = ({ blog, toggleImportance, index, id, updatedLike }) => {
     marginBottom: 5,
   }
 
-  const blogStyleWithBlock = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5,
-    display: 'block'
-  }
-
-  // const inlineBlock = {
-  //   display: 'block'
-  // }
-
-  // const label = blog.important ? 'make not important' : 'make important'
-  const buttonStyle = {
-    marginLeft: '10px',
-  };
-
   useEffect(() => {
     setLikes(blog.likes);
   }, [blog.likes]);

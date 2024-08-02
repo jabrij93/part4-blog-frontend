@@ -67,6 +67,7 @@ const App = () => {
     try {
       const returnedBlog = await blogService.update(id, blogObject);
       setLikes(returnedBlog.likes);
+      setBlogs(blogs.map(blog => (blog.id === id ? returnedBlog : blog))); // Update the state with the new blog data
       setNotifications({ message: `Liked ${returnedBlog.title} by ${returnedBlog.author}!`, type: 'success' });
       setTimeout(() => {
         setNotifications(null);

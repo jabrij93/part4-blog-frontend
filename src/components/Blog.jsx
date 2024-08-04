@@ -1,16 +1,16 @@
 import React from 'react';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 const Blog = ({ blog, toggleImportance, index, id, updatedLike, blogId, loggedInUsername }) => {
-  const [likes, setLikes] = useState(blog.likes)
-  const [visible, setVisible] = useState(false)
+  const [likes, setLikes] = useState(blog.likes);
+  const [visible, setVisible] = useState(false);
 
-  const hideWhenVisible = { display: visible ? 'none' : '' }
-  const showWhenVisible = { display: visible ? '' : 'none' }
+  const hideWhenVisible = { display: visible ? 'none' : '' };
+  const showWhenVisible = { display: visible ? '' : 'none' };
 
   const toggleVisibility = () => {
-    setVisible(!visible)
-  }
+    setVisible(!visible);
+  };
 
   const blogStyle = {
     paddingTop: 10,
@@ -18,19 +18,19 @@ const Blog = ({ blog, toggleImportance, index, id, updatedLike, blogId, loggedIn
     border: 'solid',
     borderWidth: 1,
     marginBottom: 5,
-  }
+  };
 
   useEffect(() => {
     setLikes(blog.likes);
   }, [blog.likes]);
 
   const addLike = () => {
-    updatedLike(blog.id, { ...blog, likes: likes + 1 })
-  }
+    updatedLike(blog.id, { ...blog, likes: likes + 1 });
+  };
 
   const onDelete = () => {
-    blogId(blog.id)
-  }
+    blogId(blog.id);
+  };
 
   // Ensure loggedInUsername is defined before using
   const showDeleteButton = loggedInUsername && blog.user.username === loggedInUsername;
@@ -40,26 +40,26 @@ const Blog = ({ blog, toggleImportance, index, id, updatedLike, blogId, loggedIn
     <div>
       <div style={ blogStyle }>
         <div style={{ display: 'inline-flex' }}>
-          <p style={{ marginRight: '10px', marginBottom: '0'}}> Title: {blog.title} </p> <button onClick={toggleVisibility}> view </button>
+          <p style={{ marginRight: '10px', marginBottom: '0' }}> Title: {blog.title} </p> <button onClick={toggleVisibility}> view </button>
         </div>
-        <div style={showWhenVisible}> 
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <div style={{display: 'inline-flex'}}>
+        <div style={showWhenVisible}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div>
+              <div style={{ display: 'inline-flex' }}>
                 <p> Author: {blog.author} </p>
                 <button onClick={toggleVisibility} > hide </button>
-                </div>
-              
-                <div style={{display: 'flex'}}>
-                  <p> Likes: {blog.likes} </p>
-                  <button onClick={addLike} > like </button>
-                </div>
-
-                <p> Url: {blog.url} </p>
-                {showDeleteButton && <button onClick={onDelete}>delete</button>}
               </div>
-              
+
+              <div style={{ display: 'flex' }}>
+                <p> Likes: {blog.likes} </p>
+                <button onClick={addLike} > like </button>
+              </div>
+
+              <p> Url: {blog.url} </p>
+              {showDeleteButton && <button onClick={onDelete}>delete</button>}
             </div>
+
+          </div>
         </div>
       </div>
       {/* <button onClick={toggleImportance}> {label} </button> */}

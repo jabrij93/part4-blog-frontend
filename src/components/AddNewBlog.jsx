@@ -5,7 +5,6 @@ const AddNewBlog = ( { createBlog }) => {
   const [newTitle, setNewTitles] = useState('');
   const [newAuthor, setNewAuthors] = useState('');
   const [newUrl, setNewUrls] = useState('');
-  const [notifications, setNotifications] = useState(null);
 
   const addBlog = (event) => {
     event.preventDefault();

@@ -8,11 +8,10 @@
     "build": "vite build",
     "lint": "eslint . --fix --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server": "json-server -p3001 --watch db.json"
+    "server": "json-server -p3001 --watch db.json",
+    "test": "vitest run"
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@vitejs/plugin-react": "^4.3.1",
     "axios": "^1.7.2",
@@ -44,7 +43,11 @@
   },
   "devDependencies": {
     "@stylistic/eslint-plugin-js": "^2.6.1",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
     "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.35.0"
+    "eslint-plugin-react": "^7.35.0",
+    "jsdom": "^24.1.1",
+    "vitest": "^2.0.5"
   }
 }

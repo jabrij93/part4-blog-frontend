@@ -8,6 +8,7 @@ test('renders content', () => {
 
   render(<Blog blog={blog} />)
 
+  // const element = screen.getByText((content, element) => element.tagName.toLowerCase() === 'p' && content.includes('Component testing is done with react-testing-library'))
   const element = screen.getByText((content, element) => content.includes('Component testing is done with react-testing-library'))
   expect(element).toBeDefined()
 })

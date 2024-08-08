@@ -40,7 +40,7 @@ const Blog = ({ blog, toggleImportance, index, id, updatedLike, blogId, loggedIn
     <div>
       <div style={ blogStyle } >
         <div style={{ display: 'inline-flex' }} className='blog-title'>
-          <p style={{ marginRight: '10px', marginBottom: '0' }}> Title: {blog.title} </p> <button onClick={toggleVisibility}> view </button>
+          <p style={{ marginRight: '10px', marginBottom: '0' }}> Title: {blog.title} </p> <button onClick={toggleVisibility}> shown </button>
         </div>
         <div style={showWhenVisible}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>

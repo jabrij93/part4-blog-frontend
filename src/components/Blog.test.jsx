@@ -3,14 +3,19 @@ import Blog from './Blog'
 
 test('renders content', () => {
   const blog = {
-    title: 'Component testing is done with react-testing-library'
+    title: 'Component testing is done with react-testing-library',
+    author: 'test by jabs'
   }
 
   const { container } = render(<Blog blog={blog} />)
 
-  const div = container.querySelector('.blog')
-  expect(div).toHaveTextContent(
+  const blogTitle = container.querySelector('.blog-title')
+  expect(blogTitle).toHaveTextContent(
     'Component testing is done with react-testing-library'
+  )
+  const blogAuthor = container.querySelector('.blog-author')
+  expect(blogAuthor).toHaveTextContent(
+    'test by jabs'
   )
 
   // const element = screen.getByText((content, element) => element.tagName.toLowerCase() === 'p' && content.includes('Component testing is done with react-testing-library'))

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
-const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsername }, refs) => {
+const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsername, buttonLabel}, refs) => {
   const [likes, setLikes] = useState(blog.likes);
   const [visible, setVisible] = useState(false);
 
@@ -42,9 +42,9 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsername }, refs) 
       <div style={blogStyle}>
         <div style={{ display: 'inline-flex' }} className='blog-title'>
           <p style={{ marginRight: '10px', marginBottom: '0' }}>Title: {blog.title}</p>
-          <button onClick={toggleVisibility}>show</button>
+          <button onClick={toggleVisibility} >{buttonLabel}</button>
         </div>
-        <div style={showWhenVisible}>
+        <div style={showWhenVisible} className='togglableContent'>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div>
               <div style={{ display: 'inline-flex' }} className='blog-author'>

@@ -199,7 +199,7 @@ const App = () => {
           .map((blog) => {
             console.log('Rendering blog with id:', blog.id); // Debugging line
             return (
-              <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsername={loggedInUser}/>
+              <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsername={loggedInUser} buttonLabel="show"/>
             );})}
       </ul>
       <AddNewBlog createBlog={addBlog} />

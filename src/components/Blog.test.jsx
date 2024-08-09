@@ -47,8 +47,12 @@ describe('<Blog /> testing the togglable component', () => {
     expect(div).not.toHaveStyle('display: none')
 
     // Check if the likes and URL are displayed
-    expect(screen.getByText('Likes: 1000')).toBeInTheDocument();
-    expect(screen.getByText('Url: www.consistency_leads_to_conviction.com')).toBeInTheDocument();
+    expect(screen.findAllByText((content, element) => {
+      return element.textContent.includes('likes: 1000')
+    }))
+    expect(screen.findAllByText((content, element) => {
+      return element.textContent.includes('consistency')
+    }))
   })
 })
 

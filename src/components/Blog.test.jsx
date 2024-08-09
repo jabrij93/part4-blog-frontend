@@ -45,6 +45,10 @@ describe('<Blog /> testing the togglable component', () => {
 
     const div = container.querySelector('.togglableContent')
     expect(div).not.toHaveStyle('display: none')
+
+    // Check if the likes and URL are displayed
+    expect(screen.getByText('Likes: 1000'))
+    expect(screen.getByText('Url: www.consistency_leads_to_conviction.com'))
   })
 })
 

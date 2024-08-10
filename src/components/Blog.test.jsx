@@ -54,6 +54,16 @@ describe('<Blog /> testing the togglable component', () => {
       return element.textContent.includes('consistency')
     }))
   })
+
+  test('clicking the button calls event handler twice', async () => {
+    const mockHandler = vi.fn();
+
+    const user = userEvent.setup();
+    const button = screen.getByText('show');
+    await user.click(button);
+
+    expect(mockHandler.mock.calls).toHaveLength(1);
+  });
 })
 
 // test('renders content', () => {

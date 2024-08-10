@@ -9,7 +9,6 @@ import Togglable from './components/Togglable';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  console.log('INSPECT BLOGS', blogs);
   const [likes, setLikes] = useState(blogs.likes);
   const [showAll, setShowAll] = useState(true);
   const [username, setUsername] = useState('');
@@ -197,7 +196,6 @@ const App = () => {
           .slice() // Create a copy of the blogs array to avoid mutating the original
           .sort((a, b) => b.likes - a.likes) // Sort the array based on likes in descending order
           .map((blog) => {
-            console.log('Rendering blog with id:', blog.id); // Debugging line
             return (
               <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsername={loggedInUser} buttonLabel="show"/>
             );})}

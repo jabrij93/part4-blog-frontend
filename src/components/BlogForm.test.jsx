@@ -28,7 +28,7 @@ test('<BlogForm /> updates parent state and calls onSubmit', async () => {
     await user.click(sendButton)
   
     // Check that createBlog was called once with the correct data
-    expect(createBlog.mock.calls).toHaveBeenCalledTimes(1)
+    expect(createBlog).toHaveBeenCalledTimes(1)
     expect(createBlog.mock.calls[0][0]).toEqual({
       title: 'Testing Title',
       author: 'Testing Author',

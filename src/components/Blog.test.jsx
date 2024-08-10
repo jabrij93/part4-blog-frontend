@@ -62,9 +62,11 @@ describe('<Blog /> testing the togglable component', () => {
     const user = userEvent.setup();
     const button = screen.getByText('like');
 
+    // click two times
+    await user.click(button);
     await user.click(button);
 
-    expect(mockHandler.mock.calls).toHaveLength(1);
+    expect(mockHandler.mock.calls).toHaveLength(2);
   });
 })
 

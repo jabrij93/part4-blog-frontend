@@ -5,17 +5,20 @@ import { exact } from 'prop-types';
 
 describe('<Blog /> testing the togglable component', () => {
   const blog = {
+    id: '669e85172ab0961233943563',
     author: 'By jabs',
     title: 'testing library',
     likes: 1000,
     url: 'www.consistency_leads_to_conviction.com'
   }
 
+  const mockHandler = vi.fn();
+
   let container
 
   beforeEach(() => {
     container = render(
-      <Blog blog={blog} buttonLabel="show" >
+      <Blog blog={blog} buttonLabel="show" updatedLike={mockHandler} >
         <div>testing library</div> 
         </Blog>
     ).container
@@ -56,10 +59,9 @@ describe('<Blog /> testing the togglable component', () => {
   })
 
   test('clicking the button calls event handler twice', async () => {
-    const mockHandler = vi.fn();
-
     const user = userEvent.setup();
-    const button = screen.getByText('show');
+    const button = screen.getByText('like');
+
     await user.click(button);
 
     expect(mockHandler.mock.calls).toHaveLength(1);

@@ -3,7 +3,10 @@ import BlogForm from './BlogForm'
 import userEvent from '@testing-library/user-event'
 
 test('<BlogForm /> updates parent state and calls onSubmit', async () => {
+    // The event handler is a mock function defined with Vitest:
     const createBlog = vi.fn()
+
+    // A session is started to interact with the rendered component:
     const user = userEvent.setup()
     
     render(<BlogForm createBlog={createBlog} />)
@@ -25,7 +28,7 @@ test('<BlogForm /> updates parent state and calls onSubmit', async () => {
     await user.click(sendButton)
   
     // Check that createBlog was called once with the correct data
-    expect(createBlog).toHaveBeenCalledTimes(1)
+    expect(createBlog.mock.calls).toHaveBeenCalledTimes(1)
     expect(createBlog.mock.calls[0][0]).toEqual({
       title: 'Testing Title',
       author: 'Testing Author',

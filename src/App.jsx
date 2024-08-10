@@ -1,6 +1,6 @@
 import Blog from './components/Blog.jsx';
 import { useState, useEffect, useRef } from 'react';
-import AddNewBlog from './components/AddNewBlog';
+import BlogForm from './components/BlogForm.jsx';
 import blogService from './services/blogService.js';
 import loginService from './services/login';
 import Notification from './components/Notification.jsx';
@@ -182,7 +182,7 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <Togglable buttonLabel='create new blog' ref={blogFormRef}>
-            <AddNewBlog createBlog={addBlog} />
+            <BlogForm createBlog={addBlog} />
           </Togglable>
           <button onClick={handleLogout}>logout</button>
         </div>
@@ -200,7 +200,7 @@ const App = () => {
               <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsername={loggedInUser} buttonLabel="show"/>
             );})}
       </ul>
-      <AddNewBlog createBlog={addBlog} />
+      <BlogForm createBlog={addBlog} />
     </div>
   );
 };

@@ -114,7 +114,6 @@ const App = () => {
       setTimeout(() => {
         setNotifications(null);
       }, 5000);
-      console.log('SUCCESSFULLY DELETED');
     } catch (error) {
       setNotifications({ message: error.message, type: 'error' });
       setTimeout(() => {
@@ -158,8 +157,6 @@ const App = () => {
   const loggedInUser = user?.username;
   console.log('LOGGEDINUSER', loggedInUser);
 
-
-
   return (
     <div>
       <h1>Blogs</h1>
@@ -187,10 +184,6 @@ const App = () => {
           <button onClick={handleLogout}>logout</button>
         </div>
       )}
-
-      {/* <button onClick={() => setShowAll(!showAll)}>
-        Show {showAll ? 'important' : 'all' }
-      </button> */}
       <ul>
         {blogs
           .slice() // Create a copy of the blogs array to avoid mutating the original

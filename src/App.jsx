@@ -184,7 +184,7 @@ const App = () => {
           <button onClick={handleLogout}>logout</button>
         </div>
       )}
-      <ul>
+      <div>
         {blogs
           .slice() // Create a copy of the blogs array to avoid mutating the original
           .sort((a, b) => b.likes - a.likes) // Sort the array based on likes in descending order
@@ -192,7 +192,7 @@ const App = () => {
             return (
               <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsername={loggedInUser} buttonLabel="show"/>
             );})}
-      </ul>
+      </div>
       <BlogForm createBlog={addBlog} />
     </div>
   );

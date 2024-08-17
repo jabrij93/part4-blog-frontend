@@ -45,7 +45,7 @@ const App = () => {
         console.log('RETURNED BLOGS', returnedBlog);
         setBlogs(blogs.concat(returnedBlog));
 
-        setNotifications({ message: `Added ${returnedBlog.title}! by ${returnedBlog.author}`, type: 'success' });
+        setNotifications({ message: `Added ${returnedBlog.title} by ${returnedBlog.author}`, type: 'success' });
         setTimeout(() => {
           setNotifications(null);
         }, 5000);
@@ -193,8 +193,6 @@ const App = () => {
               <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsername={loggedInUser} buttonLabel="show"/>
             );})}
       </div>
-      
-      <BlogForm createBlog={addBlog} />
       <p style={{ color: 'green', fontStyle: 'italic', fontSize: '25px'}}>Blog app, Department of Computer Science, University of Helsinki 2024</p>
     </div>
   );

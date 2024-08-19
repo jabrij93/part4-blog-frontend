@@ -42,7 +42,6 @@ const App = () => {
     blogService
       .create(blogObject)
       .then(returnedBlog => {
-        console.log('RETURNED BLOGS', returnedBlog);
         setBlogs(blogs.concat(returnedBlog));
 
         setNotifications({ message: `Added ${returnedBlog.title} by ${returnedBlog.author}`, type: 'success' });
@@ -155,7 +154,8 @@ const App = () => {
   };
 
   const loggedInUser = user?.username;
-  console.log('LOGGEDINUSER', loggedInUser);
+  console.log('Logged-in user in Playwright:', loggedInUser);
+
 
   return (
     <div>

@@ -56,6 +56,7 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsername, buttonLa
                 <button onClick={addLike}>like</button>
               </div>
               <p>Url: {blog.url}</p>
+              {console.log('showDeleteButton:', showDeleteButton)}
               {showDeleteButton && <button onClick={onDelete}>delete</button>}
             </div>
           </div>

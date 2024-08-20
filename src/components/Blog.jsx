@@ -36,6 +36,8 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsername, buttonLa
   };
 
   const showDeleteButton = loggedInUsername && blog.user.username === loggedInUsername;
+  console.log('Blog user:', blog.user.username);
+  console.log('Logged-in username:', loggedInUsername);
 
   return (
     <div>

@@ -164,16 +164,11 @@ const App = () => {
 
       {user === null ? (
         <div>
-          <div style={{ display: loginVisible ? 'none' : '' }}>
-            <button onClick={() => setLoginVisible(true)}>log in</button>
-          </div>
-          <div style={{ display: loginVisible ? '' : 'none' }}>
             <Togglable buttonLabel='login' ref={blogFormRef}>
               <LoginForm
                 userLogin={handleLogin}
               />
             </Togglable>
-          </div>
         </div>
       ) : (
         <div>

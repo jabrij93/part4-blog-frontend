@@ -15,6 +15,7 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [notifications, setNotifications] = useState(null);
   const [user, setUser] = useState(null);
+  console.log('User:', user);
   const [loginVisible, setLoginVisible] = useState(false);
 
 
@@ -154,7 +155,9 @@ const App = () => {
   };
 
   const loggedInUser = user?.username;
+  const loggedInUserID = user?.id;
   console.log('Logged-in user in Playwright:', loggedInUser);
+  console.log('Logged-in user ID in Playwright:', loggedInUserID);
 
 
   return (
@@ -184,6 +187,7 @@ const App = () => {
           .slice() // Create a copy of the blogs array to avoid mutating the original
           .sort((a, b) => b.likes - a.likes) // Sort the array based on likes in descending order
           .map((blog) => {
+            console.log('Full blog object:', blog);
             return (
               <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsername={loggedInUser} buttonLabel="show"/>
             );})}

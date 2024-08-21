@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 const BlogForm = ( { createBlog }) => {
+  const [userObject, setUserObject] = useState([]);
   const [newLike, setNewLikes] = useState('');
   const [newTitle, setNewTitles] = useState('');
   const [newAuthor, setNewAuthors] = useState('');
@@ -12,8 +13,14 @@ const BlogForm = ( { createBlog }) => {
       title: newTitle,
       author: newAuthor,
       url: newUrl,
-      likes: newLike === undefined ? 0 : Number(newLike)
+      likes: newLike === undefined ? 0 : Number(newLike),
+      user: {
+        username: user.username, 
+        id: user._id, 
+        name: user.name
+      }
     });
+    setUserObject('');
     setNewTitles('');
     setNewAuthors('');
     setNewUrls('');
@@ -23,6 +30,13 @@ const BlogForm = ( { createBlog }) => {
   return (
     <div>
       <form onSubmit={addBlog}>
+        <div>
+                <input 
+                data-testid="userObject"
+                onChange={event => setNewTitles(event.target.value)} 
+                value={newTitle} 
+                />
+        </div>
         <div>
                 title: <input 
                 data-testid="title"

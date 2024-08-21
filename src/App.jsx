@@ -187,7 +187,6 @@ const App = () => {
           .slice() // Create a copy of the blogs array to avoid mutating the original
           .sort((a, b) => b.likes - a.likes) // Sort the array based on likes in descending order
           .map((blog) => {
-            console.log('Full blog object:', blog);
             return (
               <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsernameID={loggedInUserID} buttonLabel="show"/>
             );})}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
-const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsername, buttonLabel}, refs) => {
+const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsernameID, buttonLabel}, refs) => {
   const [likes, setLikes] = useState(blog.likes);
   const [visible, setVisible] = useState(false);
 
@@ -35,10 +35,11 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsername, buttonLa
     blogId(blog.id);
   };
 
-  const showDeleteButton = loggedInUsername && blog.user === loggedInUsername;
+  const showDeleteButton = loggedInUsernameID && blog.user === loggedInUsernameID;
   console.log('Blog:', blog);
-  console.log('Blog user:', blog.user);
-  console.log('Logged-in username:', loggedInUsername);
+  console.log('Blog user:', blog.user.id);
+  console.log('Logged-in username:', loggedInUsernameID);
+  console.log("showDeleteButton:", showDeleteButton);
 
   return (
     <div>

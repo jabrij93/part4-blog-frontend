@@ -189,7 +189,7 @@ const App = () => {
           .map((blog) => {
             console.log('Full blog object:', blog);
             return (
-              <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsername={loggedInUser} buttonLabel="show"/>
+              <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsernameID={loggedInUserID} buttonLabel="show"/>
             );})}
       </div>
       <p style={{ color: 'green', fontStyle: 'italic', fontSize: '25px'}}>Blog app, Department of Computer Science, University of Helsinki 2024</p>

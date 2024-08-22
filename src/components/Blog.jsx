@@ -36,6 +36,7 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsernameID, button
   };
 
   const showDeleteButton = loggedInUsernameID && blog.user === loggedInUsernameID;
+
   console.log('Blog:', blog);
   console.log('Blog user:', blog.user.id);
   console.log('Logged-in username:', loggedInUsernameID);
@@ -43,7 +44,7 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsernameID, button
 
   return (
     <div>
-      <div style={blogStyle}>
+      <div style={blogStyle}  className='blog-show'>
         <div style={{ display: 'inline-flex' }} className='blog-title'>
           <p style={{ marginRight: '10px', marginBottom: '0' }}>Title: {blog.title}</p>
           <button onClick={toggleVisibility} >{buttonLabel}</button>

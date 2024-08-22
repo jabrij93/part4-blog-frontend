@@ -154,7 +154,7 @@ const App = () => {
     }
   };
 
-  const loggedInUser = user?.username;
+  const loggedInUser = user
   const loggedInUserID = user?.id;
   console.log('Logged-in user in Playwright:', loggedInUser);
   console.log('Logged-in user ID in Playwright:', loggedInUserID);
@@ -177,7 +177,7 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <Togglable buttonLabel='create new blog' ref={blogFormRef}>
-            <BlogForm createBlog={addBlog} />
+            <BlogForm createBlog={addBlog} user={loggedInUser} />
           </Togglable>
           <button onClick={handleLogout}>logout</button>
         </div>

@@ -7,6 +7,8 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsernameID, button
   const hideWhenVisible = { display: visible ? 'none' : '' };
   const showWhenVisible = { display: visible ? '' : 'none' };
 
+  const blogContainer = { display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }
+
   const toggleVisibility = () => {
     setVisible(!visible);
   };
@@ -44,27 +46,25 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsernameID, button
 
   return (
     <div>
-      <div style={blogStyle}  className='blog-show'>
-        <div style={{ display: 'inline-flex' }} className='blog-title'>
-          <p style={{ marginRight: '10px', marginBottom: '0' }}>Title: {blog.title}</p>
-          <button onClick={toggleVisibility} >{buttonLabel}</button>
-        </div>
-        <div style={{showWhenVisible, display: 'flex', justifyContent: 'space-between' }} className='togglableContent'>
-          <div>
+      <div style={blogStyle} className='blog'>
+          <p style={{ marginRight: '10px', marginBottom: '0' }}>
+            Title: {blog.title} 
+            <button onClick={toggleVisibility} >{buttonLabel}</button>
+          </p>
+        <div style={visible ? blogContainer : showWhenVisible} className='togglableContent'>
             <div>
-              <div style={{ display: 'inline-flex' }} className='blog-author'>
-                <p>Author: {blog.author}</p>
-                <button onClick={toggleVisibility}>hide</button>
-              </div>
-              <div style={{ display: 'flex' }}>
-                <p>Likes: {likes}</p>
-                <button onClick={addLike}>like</button>
-              </div>
+              <p>Author: {blog.author} <button onClick={toggleVisibility}>hide</button> </p>
+            </div>
+            <div>
+              <p>Likes: {likes} <button onClick={addLike}>like</button> </p>
+            </div>
+            <div>
               <p>Url: {blog.url}</p>
+            </div>
+            <div>
               {console.log('showDeleteButton:', showDeleteButton)}
               {showDeleteButton && <button onClick={onDelete}>delete</button>}
             </div>
-          </div>
         </div>
       </div>
     </div>

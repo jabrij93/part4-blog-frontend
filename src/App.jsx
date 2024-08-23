@@ -16,8 +16,6 @@ const App = () => {
   const [notifications, setNotifications] = useState(null);
   const [user, setUser] = useState(null);
   console.log('User:', user);
-  const [loginVisible, setLoginVisible] = useState(false);
-
 
   useEffect(() => {
     blogService

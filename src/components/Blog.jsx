@@ -49,8 +49,8 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsernameID, button
           <p style={{ marginRight: '10px', marginBottom: '0' }}>Title: {blog.title}</p>
           <button onClick={toggleVisibility} >{buttonLabel}</button>
         </div>
-        <div style={showWhenVisible} className='togglableContent'>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{showWhenVisible, display: 'flex', justifyContent: 'space-between' }} className='togglableContent'>
+          <div>
             <div>
               <div style={{ display: 'inline-flex' }} className='blog-author'>
                 <p>Author: {blog.author}</p>

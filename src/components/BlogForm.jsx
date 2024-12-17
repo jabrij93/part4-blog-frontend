@@ -14,8 +14,8 @@ const BlogForm = ( { createBlog, user }) => {
       url: newUrl,
       likes: newLike === undefined ? 0 : Number(newLike),
       user: {
-        username: user.username, 
-        id: user._id, 
+        username: user.username,
+        id: user._id,
         name: user.name
       }
     });
@@ -29,32 +29,32 @@ const BlogForm = ( { createBlog, user }) => {
     <div>
       <form onSubmit={addBlog}>
         <div>
-                title: <input 
-                data-testid="title"
-                onChange={event => setNewTitles(event.target.value)} 
-                value={newTitle} 
-                />
+                title: <input
+            data-testid="title"
+            onChange={event => setNewTitles(event.target.value)}
+            value={newTitle}
+          />
         </div>
         <div>
                 author: <input
-                data-testid="author"
-                onChange={event => setNewAuthors(event.target.value)} 
-                value={newAuthor} 
-                />
+            data-testid="author"
+            onChange={event => setNewAuthors(event.target.value)}
+            value={newAuthor}
+          />
         </div>
         <div>
                 url: <input
-                data-testid="url"
-                onChange={event => setNewUrls(event.target.value)} 
-                value={newUrl} 
-                />
+            data-testid="url"
+            onChange={event => setNewUrls(event.target.value)}
+            value={newUrl}
+          />
         </div>
         <div>
                 likes: <input
-                data-testid="likes"
-                onChange={event => setNewLikes(event.target.value)} 
-                value={newLike} 
-                />
+            data-testid="likes"
+            onChange={event => setNewLikes(event.target.value)}
+            value={newLike}
+          />
         </div>
         <div>
           <button type="submit">add</button>

@@ -37,7 +37,6 @@ const App = () => {
   const blogFormRef = useRef();
 
   const addBlog = (blogObject) => {
-
     blogService
       .create(blogObject)
       .then(returnedBlog => {
@@ -152,7 +151,7 @@ const App = () => {
     }
   };
 
-  const loggedInUser = user
+  const loggedInUser = user;
   const loggedInUserID = user?.id;
   console.log('Logged-in user in Playwright:', loggedInUser);
   console.log('Logged-in user ID in Playwright:', loggedInUserID);
@@ -165,11 +164,11 @@ const App = () => {
 
       {user === null ? (
         <div>
-            <Togglable buttonLabel='login' ref={blogFormRef}>
-              <LoginForm
-                userLogin={handleLogin}
-              />
-            </Togglable>
+          <Togglable buttonLabel='login' ref={blogFormRef}>
+            <LoginForm
+              userLogin={handleLogin}
+            />
+          </Togglable>
         </div>
       ) : (
         <div>
@@ -189,7 +188,7 @@ const App = () => {
               <Blog key={blog.id} blog={blog} updatedLike={addLike} blogId={handleDelete} loggedInUsernameID={loggedInUserID} buttonLabel="show"/>
             );})}
       </div>
-      <p style={{ color: 'green', fontStyle: 'italic', fontSize: '25px'}}>Blog app, Department of Computer Science, University of Helsinki 2024</p>
+      <p style={{ color: 'green', fontStyle: 'italic', fontSize: '25px' }}>Blog app, Department of Computer Science, University of Helsinki 2024</p>
     </div>
   );
 };

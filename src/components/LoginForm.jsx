@@ -3,6 +3,7 @@ import { useState } from 'react';
 const LoginForm = ({ handleCancel, userLogin }) => {
 
   const [username, setUsername] = useState('');
+  console.log('username', username);
   const [password, setPassword] = useState('');
 
   const handleLogin = (event) => {

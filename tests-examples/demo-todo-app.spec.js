@@ -56,8 +56,8 @@ test.describe('New Todo', () => {
     await createDefaultTodos(page);
 
     // create a todo count locator
-    const todoCount = page.getByTestId('todo-count')
-  
+    const todoCount = page.getByTestId('todo-count');
+
     // Check test using different methods.
     await expect(page.getByText('3 items left')).toBeVisible();
     await expect(todoCount).toHaveText('3 items left');
@@ -148,8 +148,8 @@ test.describe('Item', () => {
   });
 
   test('should allow me to un-mark items as complete', async ({ page }) => {
-     // create a new todo locator
-     const newTodo = page.getByPlaceholder('What needs to be done?');
+    // create a new todo locator
+    const newTodo = page.getByPlaceholder('What needs to be done?');
 
     // Create two items.
     for (const item of TODO_ITEMS.slice(0, 2)) {
@@ -263,7 +263,7 @@ test.describe('Counter', () => {
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
     // create a todo count locator
-    const todoCount = page.getByTestId('todo-count')
+    const todoCount = page.getByTestId('todo-count');
 
     await newTodo.fill(TODO_ITEMS[0]);
     await newTodo.press('Enter');
@@ -342,7 +342,7 @@ test.describe('Routing', () => {
   test('should allow me to display active items', async ({ page }) => {
     const todoItem = page.getByTestId('todo-item');
     await page.getByTestId('todo-item').nth(1).getByRole('checkbox').check();
-    
+
     await checkNumberOfCompletedTodosInLocalStorage(page, 1);
     await page.getByRole('link', { name: 'Active' }).click();
     await expect(todoItem).toHaveCount(2);
@@ -422,7 +422,7 @@ async function createDefaultTodos(page) {
  * @param {import('@playwright/test').Page} page
  * @param {number} expected
  */
- async function checkNumberOfTodosInLocalStorage(page, expected) {
+async function checkNumberOfTodosInLocalStorage(page, expected) {
   return await page.waitForFunction(e => {
     return JSON.parse(localStorage['react-todos']).length === e;
   }, expected);
@@ -432,7 +432,7 @@ async function createDefaultTodos(page) {
  * @param {import('@playwright/test').Page} page
  * @param {number} expected
  */
- async function checkNumberOfCompletedTodosInLocalStorage(page, expected) {
+async function checkNumberOfCompletedTodosInLocalStorage(page, expected) {
   return await page.waitForFunction(e => {
     return JSON.parse(localStorage['react-todos']).filter(i => i.completed).length === e;
   }, expected);

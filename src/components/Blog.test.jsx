@@ -10,53 +10,53 @@ describe('<Blog /> testing the togglable component', () => {
     title: 'testing library',
     likes: 1000,
     url: 'www.consistency_leads_to_conviction.com'
-  }
+  };
 
   const mockHandler = vi.fn();
 
-  let container
+  let container;
 
   beforeEach(() => {
     container = render(
       <Blog blog={blog} buttonLabel="show" updatedLike={mockHandler} >
-        <div>testing library</div> 
-        </Blog>
-    ).container
-  })
+        <div>testing library</div>
+      </Blog>
+    ).container;
+  });
 
   // option 1
   test('renders its children', async () => {
-    await screen.findAllByText('Title: testing library')
-  })
+    await screen.findAllByText('Title: testing library');
+  });
 
   // option 2
   test('renders its children', async () => {
     await screen.findAllByText((content, element) => {
-      return element.textContent.includes('testing library')
-    })
-  })
+      return element.textContent.includes('testing library');
+    });
+  });
 
   test('at start the children are not displayed', () => {
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
-  })
+    const div = container.querySelector('.togglableContent');
+    expect(div).toHaveStyle('display: none');
+  });
 
   test('after clicking the button, children are displayed', async () => {
-    const user = userEvent.setup()
-    const button = screen.getByText('show')
-    await user.click(button)
+    const user = userEvent.setup();
+    const button = screen.getByText('show');
+    await user.click(button);
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).not.toHaveStyle('display: none')
+    const div = container.querySelector('.togglableContent');
+    expect(div).not.toHaveStyle('display: none');
 
     // Check if the likes and URL are displayed
     expect(screen.findAllByText((content, element) => {
-      return element.textContent.includes('likes: 1000')
-    }))
+      return element.textContent.includes('likes: 1000');
+    }));
     expect(screen.findAllByText((content, element) => {
-      return element.textContent.includes('consistency')
-    }))
-  })
+      return element.textContent.includes('consistency');
+    }));
+  });
 
   test('clicking the button calls event handler twice', async () => {
     const user = userEvent.setup();
@@ -68,7 +68,7 @@ describe('<Blog /> testing the togglable component', () => {
 
     expect(mockHandler.mock.calls).toHaveLength(2);
   });
-})
+});
 
 // test('renders content', () => {
 //   const blog = {

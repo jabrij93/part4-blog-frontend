@@ -71,4 +71,6 @@ const Blog = forwardRef(({ blog, updatedLike, blogId, loggedInUsernameID, button
   );
 });
 
+Blog.displayName = 'Blog';
+
 export default Blog;
